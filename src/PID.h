@@ -1,12 +1,19 @@
 #ifndef PID_H
 #define PID_H
 
+#include <string>
+
 class PID {
  public:
   /**
    * Constructor
    */
   PID();
+
+  /**
+   * Parameter Constructor
+   */
+  PID(std::string control_name_);
 
   /**
    * Destructor.
@@ -31,6 +38,18 @@ class PID {
    */
   double TotalError();
 
+  /**
+   * Calculate the steering value
+   * @output The steering value
+   */
+  double UpdateSteering();
+
+  /**
+   * Calculate the throttle value
+   * @output The throttle value
+   */
+  double UpdateThrottle();
+
  private:
   /**
    * PID Errors
@@ -38,6 +57,7 @@ class PID {
   double p_error;
   double i_error;
   double d_error;
+  double prev_error;
 
   /**
    * PID Coefficients
@@ -45,6 +65,11 @@ class PID {
   double Kp;
   double Ki;
   double Kd;
+
+  /**
+   * PID device control name
+   */
+  std::string control_name;
 };
 
 #endif  // PID_H
