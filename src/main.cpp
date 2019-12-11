@@ -33,10 +33,13 @@ string hasData(string s) {
 int main() {
   uWS::Hub h;
 
+  // Initialize the pid variable.
   PID pid;
-  /**
-   * TODO: Initialize the pid variable.
-   */
+
+  double tau_p = 0.2;
+  double tau_i = 0.004;
+  double tau_d = 3.0;
+  pid.Init(tau_p, tau_i, tau_d);
 
   h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
