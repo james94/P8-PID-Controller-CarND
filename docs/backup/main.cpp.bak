@@ -1,0 +1,164 @@
+#include <math.h>
+#include <uWS/uWS.h>
+#include <iostream>
+#include <string>
+#include "json.hpp"
+#include "PID.h"
+
+// for convenience
+using nlohmann::json;
+using std::string;
+
+// For converting back and forth between radians and degrees.
+constexpr double pi() { return M_PI; }
+double deg2rad(double x) { return x * pi() / 180; }
+double rad2deg(double x) { return x * 180 / pi(); }
+
+// Checks if the SocketIO event has JSON data.
+// If there is data the JSON object in string format will be returned,
+// else the empty string "" will be returned.
+string hasData(string s) {
+  auto found_null = s.find("null");
+  auto b1 = s.find_first_of("[");
+  auto b2 = s.find_last_of("]");
+  if (found_null != string::npos) {
+    return "";
+  }
+  else if (b1 != string::npos && b2 != string::npos) {
+    return s.substr(b1, b2 - b1 + 1);
+  }
+  return "";
+}
+
+int main() {
+  uWS::Hub h;
+
+  // Initialize the pid variable.
+  PID pid, pid_speed;
+
+  // too high of tau_p, the car will oscillate a ton as the car will constantly overcorrect and overshoot the middle
+  // if tau_p too low, the car may react too slowly to curves when the car gets off center with a higher CTE
+  // at 0.5, tau_p overshoots the middle drives off the center lane
+  // double tau_p = 0.2;
+
+  // if tau_i too  high, the car tends to have quicker oscillations and doesn't get up to a quick speed
+  // if tau_i too low, cause the car to drift to one side of the lane or the other for longer periods of time
+  // at 0.1, it is too high and immediately the car goes off track
+  // at 0.04, right away the car starts steering left and then right
+  // at 0.004, the car has quicker steering left and right keeping it toward the center lane
+  // at 0.00004, it was too low and eventually the car did drift off the lane too much
+  // double tau_i = 0.0004; // best so far
+
+  // too high of tau_d leads to steering angle changes of large degrees, where car can barely move
+  // too low of tau_d leads to oscillations being too high with more overshooting
+  // at 0.001 overshooting happened faster and car went off track at beginning
+  // at 4.0 steering better handling for longer than smaller value
+  // at 6, steering longer for almost entire track without car going off center lane
+  // double tau_d = 4.0;
+
+  // Increase P gain until the response to a disturbance is steady oscillation
+  // P = 0.05 steady oscillation, but react slowly to curves
+  // Increase D gain until the oscillations go away
+  // D = 0.00001 oscillations are near gone
+  // Increase I gain until it brings you to setpoint with number of oscillations desired
+
+  // less oscillations, then less steering 
+  pid.Init(0.10, 0.0001, 1.0); 
+  // pid.Init(0.2, 0.0004, 5); // works with 0.2 throttle, car drives safely on track
+  // pid.Init(0.15, 0.0, 2.5); // Works in simulator, car drives safely
+
+  // I set to 1.0 resulted in throttle max 1.0
+  // I set to 0.0001 throttle gradually increases
+  // less oscillations, then slower speed
+  pid_speed.Init(0.1, 0.00015, 0.0);
+  // pid_speed.Init(0.2, 0.0004, 3);
+
+  h.onMessage([&pid, &pid_speed](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
+                     uWS::OpCode opCode) {
+    // "42" at the start of the message means there's a websocket message event.
+    // The 4 signifies a websocket message
+    // The 2 signifies a websocket event
+    if (length && length > 2 && data[0] == '4' && data[1] == '2') {
+      auto s = hasData(string(data).substr(0, length));
+
+      if (s != "") {
+        auto j = json::parse(s);
+
+        string event = j[0].get<string>();
+
+        if (event == "telemetry") {
+          // j[1] is the data JSON object
+          double cte = std::stod(j[1]["cte"].get<string>());
+          double speed = std::stod(j[1]["speed"].get<string>());
+          double angle = std::stod(j[1]["steering_angle"].get<string>());
+          double steer_value;
+          double throttle_value;
+          /**
+           * TODO: Calculate steering value here, remember the steering value is
+           *   [-1, 1].
+           * NOTE: Feel free to play around with the throttle and speed.
+           *   Maybe use another PID controller to control the speed!
+           */
+          pid.UpdateError(cte);
+          steer_value = pid.UpdateSteering();
+          if(steer_value > 1)
+          {
+            steer_value = 1;
+          }
+          else if(steer_value < -1)
+          {
+            steer_value = -1;
+          }
+
+          double desired_speed = 30;
+          double speed_err = abs(desired_speed - speed)/desired_speed;
+          pid_speed.UpdateError(speed_err);
+          throttle_value = pid_speed.UpdateThrottle();
+          if(throttle_value < 0)
+          {
+            throttle_value = 0;
+          }
+          else if(throttle_value > 1)
+          {
+            throttle_value = 1;
+          }
+
+          // DEBUG
+          std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
+                    << std::endl;
+
+          json msgJson;
+          msgJson["steering_angle"] = steer_value;
+          msgJson["throttle"] = throttle_value; // trying with pid speed
+          auto msg = "42[\"steer\"," + msgJson.dump() + "]";
+          std::cout << msg << std::endl;
+          ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+        }  // end "telemetry" if
+      } else {
+        // Manual driving
+        string msg = "42[\"manual\",{}]";
+        ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+      }
+    }  // end websocket message if
+  }); // end h.onMessage
+
+  h.onConnection([&h](uWS::WebSocket<uWS::SERVER> ws, uWS::HttpRequest req) {
+    std::cout << "Connected!!!" << std::endl;
+  });
+
+  h.onDisconnection([&h](uWS::WebSocket<uWS::SERVER> ws, int code, 
+                         char *message, size_t length) {
+    ws.close();
+    std::cout << "Disconnected" << std::endl;
+  });
+
+  int port = 4567;
+  if (h.listen(port)) {
+    std::cout << "Listening to port " << port << std::endl;
+  } else {
+    std::cerr << "Failed to listen to port" << std::endl;
+    return -1;
+  }
+  
+  h.run();
+}
