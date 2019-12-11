@@ -33,15 +33,26 @@ string hasData(string s) {
 int main() {
   uWS::Hub h;
 
-  // Initialize the pid variable.
-  PID pid;
+  // Initialize the pid variable for steering and speed.
+  PID pid, pid_speed;
 
-  double tau_p = 0.2;
-  double tau_i = 0.004;
-  double tau_d = 3.0;
-  pid.Init(tau_p, tau_i, tau_d);
+  // Increase P gain until the response to a disturbance is steady oscillation
+  // Increase D gain until the oscillations go away
+  // Increase I gain until it brings you to setpoint with number of oscillations desired
 
-  h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
+  // tau_p is kept small, so steering doesn't oscillate too much just enough for smooth steering
+  // tau_i is kept small, allowing the car to steer from one side to the other in longer durations
+  // tau_d is kept small, but 10x larger than tau_p, so oscillations go away
+  // hence, less oscillations, means less aggressive steering
+  pid.Init(0.10, 0.0001, 1.0); 
+
+  // tau_p is kept small, so throttle doesn't oscillate too much just enough for gradual acceleration increase
+  // tau_p is kept small for slower throttle oscillation, speed increases at a slow rate
+  // tau_d is kept at 0 since we want oscillations to increase for reaching higher car speeds
+  // less oscillations, means the throttle uses less engine power, so slower acceleration, slower speed increase 
+  pid_speed.Init(0.1, 0.00015, 0.0);
+
+  h.onMessage([&pid, &pid_speed](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
                      uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
@@ -60,20 +71,25 @@ int main() {
           double speed = std::stod(j[1]["speed"].get<string>());
           double angle = std::stod(j[1]["steering_angle"].get<string>());
           double steer_value;
-          /**
-           * TODO: Calculate steering value here, remember the steering value is
-           *   [-1, 1].
-           * NOTE: Feel free to play around with the throttle and speed.
-           *   Maybe use another PID controller to control the speed!
-           */
-          
+          double throttle_value;
+
+          // Calculate steering value within [-1, 1]
+          pid.UpdateError(cte);
+          steer_value = pid.UpdateSteering();
+
+          // Calculate throttle value within [0, 1], which controls car's speed
+          double desired_speed = 30;
+          double speed_err = abs(desired_speed - speed)/desired_speed;
+          pid_speed.UpdateError(speed_err);
+          throttle_value = pid_speed.UpdateThrottle();
+
           // DEBUG
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
                     << std::endl;
 
           json msgJson;
           msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = 0.3;
+          msgJson["throttle"] = throttle_value; // trying with pid speed
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
