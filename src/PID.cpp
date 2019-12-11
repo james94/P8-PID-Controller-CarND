@@ -8,11 +8,19 @@ PID::PID() {}
 
 PID::~PID() {}
 
+/**
+ * Init() function
+ * 
+ * Initializes PID coefficients and crosstrack error(s)
+ */
 void PID::Init(double Kp_, double Ki_, double Kd_) {
-  /**
-   * TODO: Initialize PID coefficients (and errors, if needed)
-   */
+  // Initialize PID Coefficients tau Kp, Ki, Kd
+  Kp = Kp_;
+  Ki = Ki_;
+  Kd = Kd_;
 
+  // Initialize integral crosstrack error
+  i_error = 0;
 }
 
 void PID::UpdateError(double cte) {
