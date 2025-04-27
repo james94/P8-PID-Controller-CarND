@@ -58,47 +58,84 @@ int main() {
     // The 4 signifies a websocket message
     // The 2 signifies a websocket event
     if (length && length > 2 && data[0] == '4' && data[1] == '2') {
-      auto s = hasData(string(data).substr(0, length));
+      try {
 
-      if (s != "") {
-        auto j = json::parse(s);
+        auto s = hasData(string(data).substr(0, length));
 
-        string event = j[0].get<string>();
+        if (!s.empty()) {
+          auto j = json::parse(s);
+  
+          string event = j[0].get<string>();
+  
+          std::cout << "Received event = " << event << std::endl;
+  
+          if (event == "telemetry") {
+            // Add this debug line FIRST
+            // std::cout << "Raw Telemetry Data: " << j[1].dump() << std::endl;
 
-        if (event == "telemetry") {
-          // j[1] is the data JSON object
-          double cte = std::stod(j[1]["cte"].get<string>());
-          double speed = std::stod(j[1]["speed"].get<string>());
-          double angle = std::stod(j[1]["steering_angle"].get<string>());
-          double steer_value;
-          double throttle_value;
+            // Modify validation to match actual Unity data
+            if(j[1].find("steering_angle") == j[1].end() ||
+               j[1].find("throttle") == j[1].end() ||
+               j[1].find("speed") == j[1].end()) {
+                throw std::runtime_error("Missing required telemetry fields");
+            }
 
-          // Calculate steering value within [-1, 1]
-          pid.UpdateError(cte);
-          steer_value = pid.UpdateSteering();
+            // j[1] is the data JSON object
+            // double cte = j[1]["cte"].get<double>();
+            double cte = j[1].value("cte", 0.0); // Default to 0.0 if missing
+            double speed = j[1]["speed"].get<double>();
+            double angle = j[1]["steering_angle"].get<double>();
+            double steer_value;
+            double throttle_value;
+  
+            // Calculate steering value within [-1, 1]
+            pid.UpdateError(cte);
+            steer_value = pid.UpdateSteering();
+  
+            // Calculate throttle value within [0, 1], which controls car's speed
+            double desired_speed = 30;
+            double speed_err = abs(desired_speed - speed)/desired_speed;
+            pid_speed.UpdateError(speed_err);
+            throttle_value = pid_speed.UpdateThrottle();
+  
+            // DEBUG
+            std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
+                      << std::endl;
+  
+            json msgJson;
+            // msgJson["steering_angle"] = steer_value;
+            // msgJson["throttle"] = throttle_value; // trying with pid speed
+            
+            // Data Formatting Adjustments for Precision Control & Type Consistency
+            msgJson["steering_angle"] = std::round(steer_value * 1000.0) / 1000.0; // 3 decimal places
+            msgJson["throttle"] = std::round(throttle_value * 1000.0) / 1000.0; // 3 decimal places
 
-          // Calculate throttle value within [0, 1], which controls car's speed
-          double desired_speed = 30;
-          double speed_err = abs(desired_speed - speed)/desired_speed;
-          pid_speed.UpdateError(speed_err);
-          throttle_value = pid_speed.UpdateThrottle();
+            auto msg = "42[\"steer\"," + msgJson.dump() + "]";
+            std::cout << "Sending: " << msg << std::endl;
+            // ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
 
-          // DEBUG
-          std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
-                    << std::endl;
-
-          json msgJson;
-          msgJson["steering_angle"] = steer_value;
-          msgJson["throttle"] = throttle_value; // trying with pid speed
-          auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-          std::cout << msg << std::endl;
+            // Add async send verification
+            ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT,
+                [](void*, void*, bool cancelled, void*) {
+                    if(!cancelled) {
+                      std::cerr << "Failed to send steer command!" << std::endl;
+                    }
+                },
+                nullptr); // Last parameter is callback user data
+          }  // end "telemetry" if
+        } else {
+          // Manual driving
+          string msg = "42[\"manual\",{}]";
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
-        }  // end "telemetry" if
-      } else {
-        // Manual driving
-        string msg = "42[\"manual\",{}]";
+        }
+
+      } catch (const std::exception& e) {
+        std::cerr << "Error processing message: " << e.what() << std::endl;
+        // send error response
+        auto msg = "42[\"error\",{\"message\":\"" + string(e.what()) + "\"}]";
         ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
       }
+
     }  // end websocket message if
   }); // end h.onMessage
 
