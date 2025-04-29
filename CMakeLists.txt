@@ -1,26 +1,55 @@
-project(PID)
+cmake_minimum_required (VERSION 3.20)
+project(PID_WebSocket_Controller LANGUAGES CXX)
 
-cmake_minimum_required (VERSION 3.5)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_definitions(-std=c++11)
+# Conan dependencies
+find_package(nlohmann_json REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(libuv REQUIRED)
+find_package(GTest REQUIRED CONFIG)
+find_package(uwebsockets REQUIRED)
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS "${CXX_FLAGS}")
+# Main Library Components
+add_library(EdgeDataflowProcessors
+    src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp
+)
 
-set(sources src/PID.cpp src/main.cpp)
+target_include_directories(EdgeDataflowProcessors PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/edge_dataflow/web_socket_handler
+    ${uwebsockets_INCLUDE_DIRS}
+)
 
-include_directories(/usr/local/include)
-link_directories(/usr/local/lib)
+target_link_libraries(EdgeDataflowProcessors PUBLIC
+    nlohmann_json::nlohmann_json
+    openssl::openssl
+    uv_a
+    uwebsockets::uwebsockets
+)
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
+# Main executable with WebSocket test
+# add_executable(WebSocketMain
+#     src/main.cpp
+# )
 
-include_directories(/usr/local/opt/openssl/include)
-link_directories(/usr/local/opt/openssl/lib)
-link_directories(/usr/local/Cellar/libuv/1*/lib)
+# target_link_libraries(WebSocketMain PRIVATE
+#     EdgeDataflowProcessors
+# )
 
-endif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin") 
+# Test Configuration
+enable_testing()
+add_executable(ControllerTests
+    tests/unit/WebSocketTest.cpp
+)
 
+message("GTest_LIBRARIES = ${GTest_LIBRARIES}")
+target_link_libraries(ControllerTests PUBLIC
+    EdgeDataflowProcessors
+    GTest::gtest_main
+    uwebsockets::uwebsockets
+)
 
-add_executable(pid ${sources})
-
-target_link_libraries(pid z ssl uv uWS)
+include(GoogleTest)
+gtest_discover_tests(ControllerTests)

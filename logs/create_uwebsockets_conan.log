@@ -1,0 +1,171 @@
+dockeruser@jg_sdc_backend:/home/ubuntu/src/james/P8-PID-Controller-CarND$ python ./scripts/create_uwebsockets.py
+
+======== Exporting recipe to the cache ========
+uwebsockets/e94b6e1@udacity/stable: Exporting package recipe: /home/ubuntu/src/james/P8-PID-Controller-CarND/thirdparty/uwebsockets/all/conanfile.py
+uwebsockets/e94b6e1@udacity/stable: exports: File 'conandata.yml' found. Exporting it...
+uwebsockets/e94b6e1@udacity/stable: Copied 2 '.yml' files: conandata.yml, conandata.yml
+uwebsockets/e94b6e1@udacity/stable: Copied 1 '.py' file: conanfile.py
+uwebsockets/e94b6e1@udacity/stable: Exported to cache folder: /home/dockeruser/.conan2/p/uwebsa9967cc68b59d/e
+uwebsockets/e94b6e1@udacity/stable: Exported: uwebsockets/e94b6e1@udacity/stable#2507a918d9a2a650f2b486cfb2a27b08 (2025-04-28 08:39:21 UTC)
+
+======== Exporting recipe to the cache ========
+uwebsockets/e94b6e1: Exporting package recipe: /home/ubuntu/src/james/P8-PID-Controller-CarND/thirdparty/uwebsockets/all/conanfile.py
+uwebsockets/e94b6e1: exports: File 'conandata.yml' found. Exporting it...
+uwebsockets/e94b6e1: Copied 2 '.yml' files: conandata.yml, conandata.yml
+uwebsockets/e94b6e1: Copied 1 '.py' file: conanfile.py
+uwebsockets/e94b6e1: Exported to cache folder: /home/dockeruser/.conan2/p/uwebsade1163abee54/e
+uwebsockets/e94b6e1: Exported: uwebsockets/e94b6e1#2507a918d9a2a650f2b486cfb2a27b08 (2025-04-28 08:39:21 UTC)
+
+======== Input profiles ========
+Profile host:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=gcc
+compiler.cppstd=gnu17
+compiler.libcxx=libstdc++11
+compiler.version=11
+os=Linux
+
+Profile build:
+[settings]
+arch=x86_64
+build_type=Release
+compiler=gcc
+compiler.cppstd=gnu17
+compiler.libcxx=libstdc++11
+compiler.version=11
+os=Linux
+
+
+======== Computing dependency graph ========
+Graph root
+    cli
+Requirements
+    openssl/3.1.1#59f61ed61b1724185612845c17b50433 - Cache
+    uwebsockets/e94b6e1#2507a918d9a2a650f2b486cfb2a27b08 - Cache
+    zlib/1.3.1#b8bc2603263cf7eccbd6e17e66b0ed76 - Cache
+Resolved version ranges
+    zlib/[>=1.2.11 <2]: zlib/1.3.1
+
+======== Computing necessary packages ========
+uwebsockets/e94b6e1: Checking 11 compatible configurations
+uwebsockets/e94b6e1: Compatible configurations not found in cache, checking servers
+uwebsockets/e94b6e1: '874df9407ae60733b6b16e53530cccabc39ee85a': compiler.cppstd=98
+uwebsockets/e94b6e1: 'a567e9daa42d9398b638f15f9c912887e528b012': compiler.cppstd=gnu98
+uwebsockets/e94b6e1: '52311e4916961c8119562a509dd18a9999169594': compiler.cppstd=11
+uwebsockets/e94b6e1: 'fa3b547070352a23f0aab5826c30ea055e4b3be8': compiler.cppstd=gnu11
+uwebsockets/e94b6e1: 'a4d09e20d41788c3c9a3039c62b951e875c93f04': compiler.cppstd=14
+uwebsockets/e94b6e1: '5268b982bfc31e30acf969064a091e5ef947308d': compiler.cppstd=gnu14
+uwebsockets/e94b6e1: '4ed63a72c237e9e69b127e9ff5d21a30f07f3d4e': compiler.cppstd=17
+uwebsockets/e94b6e1: '52af593c1a3ca7b4f7da378a79e5b6c5e86217fa': compiler.cppstd=20
+uwebsockets/e94b6e1: '6e5bbf1312d50b9405c504748968bd104548163e': compiler.cppstd=gnu20
+uwebsockets/e94b6e1: '66105b8880f5b32e73c67b99412cd30afc7faecb': compiler.cppstd=23
+uwebsockets/e94b6e1: 'aca86955238d2580188eb9905e7bf9a98df7654d': compiler.cppstd=gnu23
+Requirements
+    openssl/3.1.1#59f61ed61b1724185612845c17b50433:954557e48ef7835f74263af1ea011016c8cbebc4#7661f6f4c8702a25955dceb802252d4b - Cache
+    uwebsockets/e94b6e1#2507a918d9a2a650f2b486cfb2a27b08:f191f9dc2ae7e08e2ee5f332f1d20df5b426c8cf - Build
+    zlib/1.3.1#b8bc2603263cf7eccbd6e17e66b0ed76:b647c43bfefae3f830561ca202b6cfd935b56205#fee20b6da94c4580b0c84ca5ce203fdc - Cache
+
+======== Installing packages ========
+zlib/1.3.1: Already installed! (1 of 3)
+openssl/3.1.1: Already installed! (2 of 3)
+uwebsockets/e94b6e1: Calling source() in /home/dockeruser/.conan2/p/uwebsade1163abee54/s
+
+-------- Installing package uwebsockets/e94b6e1 (3 of 3) --------
+uwebsockets/e94b6e1: Building from source
+uwebsockets/e94b6e1: Package uwebsockets/e94b6e1:f191f9dc2ae7e08e2ee5f332f1d20df5b426c8cf
+uwebsockets/e94b6e1: Copying sources to build folder
+uwebsockets/e94b6e1: Building your package in /home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b
+uwebsockets/e94b6e1: Writing generators to /home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b/build/Release/generators
+uwebsockets/e94b6e1: Generator 'CMakeToolchain' calling 'generate()'
+uwebsockets/e94b6e1: CMakeToolchain generated: conan_toolchain.cmake
+uwebsockets/e94b6e1: CMakeToolchain generated: CMakePresets.json
+uwebsockets/e94b6e1: CMakeToolchain generated: ../../../CMakeUserPresets.json
+uwebsockets/e94b6e1: Generator 'CMakeDeps' calling 'generate()'
+uwebsockets/e94b6e1: CMakeDeps necessary find_package() and targets for your CMakeLists.txt
+    find_package(OpenSSL)
+    target_link_libraries(... openssl::openssl)
+uwebsockets/e94b6e1: Generating aggregated env files
+uwebsockets/e94b6e1: Generated aggregated env files: ['conanbuild.sh', 'conanrun.sh']
+uwebsockets/e94b6e1: Calling build()
+uwebsockets/e94b6e1: Running CMake.configure()
+uwebsockets/e94b6e1: RUN: cmake -G "Unix Makefiles" -DCMAKE_TOOLCHAIN_FILE="/home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b/build/Release/generators/conan_toolchain.cmake" -DCMAKE_INSTALL_PREFIX="/home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/p" -DCMAKE_POLICY_DEFAULT_CMP0091="NEW" -DCMAKE_BUILD_TYPE="Release" "/home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b"
+-- Using Conan toolchain: /home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b/build/Release/generators/conan_toolchain.cmake
+-- Conan toolchain: C++ Standard 17 with extensions ON
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Conan: Component target declared 'OpenSSL::Crypto'
+-- Conan: Component target declared 'OpenSSL::SSL'
+-- Conan: Target declared 'openssl::openssl'
+-- Conan: Target declared 'ZLIB::ZLIB'
+-- Conan: Including build module from '/home/dockeruser/.conan2/p/opens00a2dad8cdbb7/p/lib/cmake/conan-official-openssl-variables.cmake'
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b/build/Release
+
+uwebsockets/e94b6e1: Running CMake.build()
+uwebsockets/e94b6e1: RUN: cmake --build "/home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b/build/Release" -- -j20
+[  6%] Building CXX object CMakeFiles/uWS.dir/src/Extensions.cpp.o
+[ 13%] Building CXX object CMakeFiles/uWS.dir/src/Group.cpp.o
+[ 20%] Building CXX object CMakeFiles/uWS.dir/src/WebSocketImpl.cpp.o
+[ 26%] Building CXX object CMakeFiles/uWS.dir/src/Hub.cpp.o
+[ 33%] Building CXX object CMakeFiles/uWS.dir/src/Networking.cpp.o
+[ 40%] Building CXX object CMakeFiles/uWS.dir/src/Node.cpp.o
+[ 46%] Building CXX object CMakeFiles/uWS.dir/src/HTTPSocket.cpp.o
+[ 53%] Building CXX object CMakeFiles/uWS.dir/src/WebSocket.cpp.o
+[ 60%] Building CXX object CMakeFiles/uWS.dir/src/Socket.cpp.o
+[ 66%] Building CXX object CMakeFiles/uWS.dir/src/uUV.cpp.o
+[ 73%] Linking CXX shared library libuWS.so
+[ 73%] Built target uWS
+[ 80%] Building CXX object examples/CMakeFiles/echo.dir/echo.cpp.o
+[ 86%] Building CXX object examples/CMakeFiles/multithreaded_echo.dir/multithreaded_echo.cpp.o
+[ 93%] Linking CXX executable echo
+/usr/bin/ld: CMakeFiles/echo.dir/echo.cpp.o: in function `uWS::Hub::Hub(int, bool)':
+echo.cpp:(.text._ZN3uWS3HubC2Eib[_ZN3uWS3HubC5Eib]+0xa2): undefined reference to `inflateInit2_'
+/usr/bin/ld: CMakeFiles/echo.dir/echo.cpp.o: in function `uWS::Hub::~Hub()':
+echo.cpp:(.text._ZN3uWS3HubD2Ev[_ZN3uWS3HubD5Ev]+0x13): undefined reference to `inflateEnd'
+/usr/bin/ld: ../libuWS.so: undefined reference to `inflate'
+/usr/bin/ld: ../libuWS.so: undefined reference to `inflateReset'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [examples/CMakeFiles/echo.dir/build.make:99: examples/echo] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:128: examples/CMakeFiles/echo.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[100%] Linking CXX executable multithreaded_echo
+/usr/bin/ld: CMakeFiles/multithreaded_echo.dir/multithreaded_echo.cpp.o: in function `std::thread::_State_impl<std::thread::_Invoker<std::tuple<main::{lambda()#2}> > >::_M_run()':
+multithreaded_echo.cpp:(.text+0x491): undefined reference to `inflateInit2_'
+/usr/bin/ld: CMakeFiles/multithreaded_echo.dir/multithreaded_echo.cpp.o: in function `uWS::Hub::Hub(int, bool)':
+multithreaded_echo.cpp:(.text._ZN3uWS3HubC2Eib[_ZN3uWS3HubC5Eib]+0xa2): undefined reference to `inflateInit2_'
+/usr/bin/ld: CMakeFiles/multithreaded_echo.dir/multithreaded_echo.cpp.o: in function `uWS::Hub::~Hub()':
+multithreaded_echo.cpp:(.text._ZN3uWS3HubD2Ev[_ZN3uWS3HubD5Ev]+0x13): undefined reference to `inflateEnd'
+/usr/bin/ld: ../libuWS.so: undefined reference to `inflate'
+/usr/bin/ld: ../libuWS.so: undefined reference to `inflateReset'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [examples/CMakeFiles/multithreaded_echo.dir/build.make:99: examples/multithreaded_echo] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:154: examples/CMakeFiles/multithreaded_echo.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+uwebsockets/e94b6e1: ERROR: 
+Package 'f191f9dc2ae7e08e2ee5f332f1d20df5b426c8cf' build failed
+uwebsockets/e94b6e1: WARN: Build folder /home/dockeruser/.conan2/p/b/uwebseba6f12b03c41/b/build/Release
+ERROR: uwebsockets/e94b6e1: Error in build() method, line 28
+	cmake.build()
+	ConanException: Error 2 while executing
+Traceback (most recent call last):
+  File "/home/ubuntu/src/james/P8-PID-Controller-CarND/./scripts/create_uwebsockets.py", line 24, in <module>
+    create_package()
+  File "/home/ubuntu/src/james/P8-PID-Controller-CarND/./scripts/create_uwebsockets.py", line 16, in create_package
+    subprocess.run([
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['conan', 'create', '.', '--profile=/home/dockeruser/.conan2/profiles/default', '--build=missing']' returned non-zero exit status 1.

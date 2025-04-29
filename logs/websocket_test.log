@@ -1,0 +1,72 @@
+[ 75%] Linking CXX executable ControllerTests
+/usr/bin/ld: /usr/lib/gcc/x86_64-linux-gnu/11/../../../x86_64-linux-gnu/Scrt1.o: in function `_start':
+(.text+0x1b): undefined reference to `main'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `WebSocketHandlerTest_HandlesMessageCallbacks_Test::TestBody()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:72: undefined reference to `testing::Message::Message()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:72: undefined reference to `testing::internal::GetBoolAssertionFailureMessage[abi:cxx11](testing::AssertionResult const&, char const*, char const*, char const*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:72: undefined reference to `testing::internal::AssertHelper::AssertHelper(testing::TestPartResult::Type, char const*, int, char const*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:72: undefined reference to `testing::internal::AssertHelper::operator=(testing::Message const&) const'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:72: undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:72: undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `WebSocketHandlerTest_ValidMessageProcessing_Test::TestBody()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:78: undefined reference to `testing::Message::Message()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:78: undefined reference to `testing::internal::GetBoolAssertionFailureMessage[abi:cxx11](testing::AssertionResult const&, char const*, char const*, char const*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:78: undefined reference to `testing::internal::AssertHelper::AssertHelper(testing::TestPartResult::Type, char const*, int, char const*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:78: undefined reference to `testing::internal::AssertHelper::operator=(testing::Message const&) const'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:78: undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:78: undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `WebSocketHandlerTest_InvalidMessageProcessing_Test::TestBody()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:84: undefined reference to `testing::Message::Message()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:84: undefined reference to `testing::internal::GetBoolAssertionFailureMessage[abi:cxx11](testing::AssertionResult const&, char const*, char const*, char const*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:84: undefined reference to `testing::internal::AssertHelper::AssertHelper(testing::TestPartResult::Type, char const*, int, char const*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:84: undefined reference to `testing::internal::AssertHelper::operator=(testing::Message const&) const'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:84: undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:84: undefined reference to `testing::internal::AssertHelper::~AssertHelper()'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `__static_initialization_and_destruction_0(int, int)':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:69: undefined reference to `testing::internal::MakeAndRegisterTestInfo(char const*, char const*, char const*, char const*, testing::internal::CodeLocation, void const*, void (*)(), void (*)(), testing::internal::TestFactoryBase*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:75: undefined reference to `testing::internal::MakeAndRegisterTestInfo(char const*, char const*, char const*, char const*, testing::internal::CodeLocation, void const*, void (*)(), void (*)(), testing::internal::TestFactoryBase*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:81: undefined reference to `testing::internal::MakeAndRegisterTestInfo(char const*, char const*, char const*, char const*, testing::internal::CodeLocation, void const*, void (*)(), void (*)(), testing::internal::TestFactoryBase*)'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `testing::internal::SuiteApiResolver<WebSocketHandlerTest>::GetSetUpCaseOrSuite(char const*, int)':
+/usr/include/gtest/internal/gtest-internal.h:529: undefined reference to `testing::internal::IsTrue(bool)'
+/usr/bin/ld: /usr/include/gtest/internal/gtest-internal.h:529: undefined reference to `testing::internal::GTestLog::GTestLog(testing::internal::GTestLogSeverity, char const*, int)'
+/usr/bin/ld: /usr/include/gtest/internal/gtest-internal.h:529: undefined reference to `testing::internal::GTestLog::~GTestLog()'
+/usr/bin/ld: /usr/include/gtest/internal/gtest-internal.h:529: undefined reference to `testing::internal::GTestLog::~GTestLog()'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `testing::internal::SuiteApiResolver<WebSocketHandlerTest>::GetTearDownCaseOrSuite(char const*, int)':
+/usr/include/gtest/internal/gtest-internal.h:550: undefined reference to `testing::internal::IsTrue(bool)'
+/usr/bin/ld: /usr/include/gtest/internal/gtest-internal.h:550: undefined reference to `testing::internal::GTestLog::GTestLog(testing::internal::GTestLogSeverity, char const*, int)'
+/usr/bin/ld: /usr/include/gtest/internal/gtest-internal.h:550: undefined reference to `testing::internal::GTestLog::~GTestLog()'
+/usr/bin/ld: /usr/include/gtest/internal/gtest-internal.h:550: undefined reference to `testing::internal::GTestLog::~GTestLog()'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `WebSocketHandlerTest::~WebSocketHandlerTest()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:6: undefined reference to `testing::Test::~Test()'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o:(.data.rel.ro._ZTI20WebSocketHandlerTest[_ZTI20WebSocketHandlerTest]+0x10): undefined reference to `typeinfo for testing::Test'
+/usr/bin/ld: CMakeFiles/ControllerTests.dir/tests/unit/WebSocketTest.cpp.o: in function `WebSocketHandlerTest::WebSocketHandlerTest()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:6: undefined reference to `testing::Test::Test()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/tests/unit/WebSocketTest.cpp:6: undefined reference to `testing::Test::~Test()'
+/usr/bin/ld: libEdgeDataflowProcessors.a(WebSocketHandler.cpp.o): in function `WebSocketHandler::initialize(int)':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:30: undefined reference to `uWS::Group<true>::onMessage(std::function<void (uWS::WebSocket<true>, char*, unsigned long, uWS::OpCode)>)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:38: undefined reference to `uWS::Hub::listen(int, uS::TLS::Context, int, uWS::Group<true>*)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:38: undefined reference to `uS::TLS::Context::~Context()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:42: undefined reference to `uS::Node::run()'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:38: undefined reference to `uS::TLS::Context::~Context()'
+/usr/bin/ld: libEdgeDataflowProcessors.a(WebSocketHandler.cpp.o): in function `WebSocketHandler::sendResponse(uWS::WebSocket<true>, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:66: undefined reference to `uWS::WebSocket<true>::send(char const*, unsigned long, uWS::OpCode, void (*)(void*, void*, bool, void*), void*)'
+/usr/bin/ld: libEdgeDataflowProcessors.a(WebSocketHandler.cpp.o): in function `WebSocketHandler::shutdown()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:70: undefined reference to `uWS::Group<true>::close(int, char*, unsigned long)'
+/usr/bin/ld: libEdgeDataflowProcessors.a(WebSocketHandler.cpp.o): in function `uWS::Hub::Hub(int, bool)':
+/usr/include/uWS/Hub.h:47: undefined reference to `uS::Node::Node(int, int, int, bool)'
+/usr/bin/ld: /usr/include/uWS/Hub.h:47: undefined reference to `uWS::Group<true>::Group(int, uWS::Hub*, uS::NodeData*)'
+/usr/bin/ld: /usr/include/uWS/Hub.h:47: undefined reference to `uWS::Group<false>::Group(int, uWS::Hub*, uS::NodeData*)'
+/usr/bin/ld: /usr/include/uWS/Hub.h:48: undefined reference to `inflateInit2_'
+/usr/bin/ld: /usr/include/uWS/Hub.h:50: undefined reference to `uS::Node::~Node()'
+/usr/bin/ld: libEdgeDataflowProcessors.a(WebSocketHandler.cpp.o): in function `uWS::Hub::~Hub()':
+/usr/include/uWS/Hub.h:53: undefined reference to `inflateEnd'
+/usr/bin/ld: /usr/include/uWS/Hub.h:55: undefined reference to `uS::Node::~Node()'
+/usr/bin/ld: libEdgeDataflowProcessors.a(WebSocketHandler.cpp.o): in function `WebSocketHandler::Impl::Impl()':
+/home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:11: undefined reference to `uWS::Group<true>::onConnection(std::function<void (uWS::WebSocket<true>, uWS::HttpRequest)>)'
+/usr/bin/ld: /home/ubuntu/src/james/P8-PID-Controller-CarND/src/edge_dataflow/web_socket_handler/WebSocketHandler.cpp:15: undefined reference to `uWS::Group<true>::onDisconnection(std::function<void (uWS::WebSocket<true>, int, char*, unsigned long)>)'
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [CMakeFiles/ControllerTests.dir/build.make:98: ControllerTests] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:111: CMakeFiles/ControllerTests.dir/all] Error 2
+gmake: *** [Makefile:101: all] Error 2
+
+Build failed: Command '['cmake', '--build', 'build', '--config', 'Debug', '-j', '20']' returned non-zero exit status 2.

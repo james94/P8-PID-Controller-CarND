@@ -103,16 +103,13 @@ int main() {
                       << std::endl;
   
             json msgJson;
-            // msgJson["steering_angle"] = steer_value;
-            // msgJson["throttle"] = throttle_value; // trying with pid speed
-            
+
             // Data Formatting Adjustments for Precision Control & Type Consistency
             msgJson["steering_angle"] = std::round(steer_value * 1000.0) / 1000.0; // 3 decimal places
             msgJson["throttle"] = std::round(throttle_value * 1000.0) / 1000.0; // 3 decimal places
 
             auto msg = "42[\"steer\"," + msgJson.dump() + "]";
             std::cout << "Sending: " << msg << std::endl;
-            // ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
 
             // Add async send verification
             ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT,
