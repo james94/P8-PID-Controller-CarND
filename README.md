@@ -116,13 +116,7 @@ cd P8-PID-Controller-CarND
 
 > **WARNING**: for the above shell script, choose the one appropriate for your OS
 
-At the end of the install script, the **make** build automation tool uses the compiler to compile the project and the following executable program **pid** will be generated in the **build** folder. Run the command below:
-
-~~~bash
-./run.sh
-~~~
-
-Let's say you make updates to the C++ program, all we need to do is rerun the build and compile commands using the shell commands below:
+Run the build and compile commands using the shell commands below:
 
 ~~~bash
 ./build.sh
